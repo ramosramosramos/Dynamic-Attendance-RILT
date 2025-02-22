@@ -13,9 +13,9 @@ export default function UserCard({ user }) {
                 <div className='flex justify-end'>
                     <Dropdown>
                         <Dropdown.Trigger>
-                            <spa className='cursor-pointer text-white'>
+                            <span className='cursor-pointer text-white'>
                                 <MoreVertIcon />
-                            </spa>
+                            </span>
                         </Dropdown.Trigger>
                         <Dropdown.Content>
                             <Dropdown.Link href={route('users.edit', user.id)}>

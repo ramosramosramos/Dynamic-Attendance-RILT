@@ -1,5 +1,6 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import UserCard from '@/Components/Cards/UserCard';
+import SearchInput from '@/Components/Inputs/SearchInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router } from '@inertiajs/react';
 
@@ -21,6 +22,9 @@ export default function Index({ users }) {
                           <PrimaryButton onClick={() => router.get(route('users.create'))}>
                             Create new user
                           </PrimaryButton>
+                        </div>
+                        <div className="p-6 text-gray-900">
+                      <SearchInput items={users.data} url = {route('users.index')}/>
                         </div>
                     </div>
                     <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ">
