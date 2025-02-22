@@ -3,6 +3,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import Dropdown from '../DropDowns/Dropdown';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { toast } from 'react-toastify';
 export default function UserCard({ user }) {
 
     return (
@@ -20,10 +21,10 @@ export default function UserCard({ user }) {
                             <Dropdown.Link href={route('users.edit', user.id)}>
                                 Edit
                             </Dropdown.Link>
-                            <Dropdown.Link>
+                            <Dropdown.Link onSuccess= {()=>toast.success("Successfully move to archive.")}  method="post" href={route('users.moveArchive', user.id)}>
                                 Archive
                             </Dropdown.Link>
-                            <Dropdown.Link>
+                            <Dropdown.Link  onSuccess= {()=>toast.success("Successfully move to bin.")}  method="post" href={route('users.destroy', user.id)}>
                                 Move to bin
                             </Dropdown.Link>
                         </Dropdown.Content>

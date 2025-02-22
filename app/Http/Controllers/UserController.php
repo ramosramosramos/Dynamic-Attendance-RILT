@@ -16,7 +16,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles:id,name')->whereHas('roles', function ($query) {
+        $users = User::with('roles:id,name')
+        ->whereNull('archive_at')
+        ->whereHas('roles', function ($query) {
             $query->where('name', '!=', RoleEnum::ADMIN);
         })->latest()->paginate(20);
 
@@ -81,7 +83,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
     }
 
     public function moveArchive(User $user)
