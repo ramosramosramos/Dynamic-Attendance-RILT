@@ -27,6 +27,7 @@
         "@mui/icons-material": "^6.4.5",
         "@mui/material": "^6.4.5",
         "@mui/styled-engine-sc": "^6.4.3",
+        "react-toastify": "^11.0.3",
         "styled-components": "^6.1.15"
     }
 }

@@ -1,6 +1,7 @@
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import UserCard from '@/Components/Cards/UserCard';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 
 export default function Index({ users }) {
     return (
@@ -17,7 +18,9 @@ export default function Index({ users }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            You're logged in!
+                          <PrimaryButton onClick={() => router.get(route('users.create'))}>
+                            Create new user
+                          </PrimaryButton>
                         </div>
                     </div>
                     <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ">

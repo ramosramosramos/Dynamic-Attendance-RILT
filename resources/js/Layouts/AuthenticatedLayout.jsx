@@ -4,10 +4,11 @@ import NavLink from '@/Components/Links/NavLink';
 import ResponsiveNavLink from '@/Components/Links/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
-    const {url} = usePage();
+    const { url } = usePage();
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -177,6 +178,16 @@ export default function AuthenticatedLayout({ header, children }) {
             )}
 
             <main>{children}</main>
+
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                closeOnClick={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+            />
         </div>
     );
 }

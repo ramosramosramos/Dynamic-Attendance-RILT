@@ -1,0 +1,112 @@
+import PrimaryButton from '@/Components/Buttons/PrimaryButton';
+import UserCard from '@/Components/Cards/UserCard';
+import InputError from '@/Components/Inputs/InputError';
+import InputLabel from '@/Components/Inputs/InputLabel';
+import SelectInput from '@/Components/Inputs/SelectInput';
+import TextInput from '@/Components/Inputs/TextInput';
+import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import { Head, useForm } from '@inertiajs/react';
+import { toast } from 'react-toastify';
+
+export default function Create({roles}) {
+
+    const { data, setData, post, processing, errors, reset } = useForm({
+        name: '',
+        email: '',
+        role: '',
+
+    });
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        console.log(data);
+        // post(route('users.store'), {
+        //     preserveScroll: true,
+        //     onSuccess: () => toast.success('User created successfully!'),
+        //     onError: (error) => {
+        //         toast.error(error.name);
+        //         toast.error(error.email);
+        //     }
+        // });
+
+    };
+
+    return (
+        <AuthenticatedLayout
+            header={
+                <h2 className="text-xl font-semibold leading-tight text-gray-800">
+                    Create | User
+                </h2>
+            }
+        >
+            <Head title="Create | User" />
+
+            <div className="py-12">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
+                        <div className="p-6 text-gray-900">
+                            You're logged in!
+                        </div>
+                    </div>
+                    <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-2 sm:grid-cols-1 ">
+
+
+                        <form onSubmit={submit} className='w-full'>
+                            <div>
+                                <InputLabel htmlFor="name" value="Name" />
+
+                                <TextInput
+                                    id="name"
+                                    name="name"
+                                    value={data.name}
+                                    className="mt-1 block w-full"
+                                    autoComplete="name"
+                                    isFocused={true}
+                                    onChange={(e) => setData('name', e.target.value)}
+
+                                />
+
+                                <InputError message={errors.name} className="mt-2" />
+                            </div>
+
+                            <div className="mt-4">
+                                <InputLabel htmlFor="email" value="Email" />
+
+                                <TextInput
+                                    id="email"
+                                    type="email"
+                                    name="email"
+                                    value={data.email}
+                                    className="mt-1 block w-full"
+                                    autoComplete="username"
+                                    onChange={(e) => setData('email', e.target.value)}
+
+                                />
+
+                                <InputError message={errors.email} className="mt-2" />
+                            </div>
+                            <div className="mt-4">
+                                <InputLabel htmlFor="role" value="Role" />
+
+                              <SelectInput  value={data.role}  onChange={(e) => setData('role', e.target.value)} items={roles}/>
+
+                                <InputError message={errors.role} className="mt-2" />
+                            </div>
+
+
+                            <div className="mt-4 flex items-center justify-start">
+
+
+                                <PrimaryButton  disabled={processing}>
+                                    Create
+                                </PrimaryButton>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </AuthenticatedLayout>
+    );
+}

@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -29,7 +30,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('User/Create',[
+            'roles' => $this->getRoles(),
+        ]);
     }
 
     /**
@@ -70,5 +73,10 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    private function getRoles()
+    {
+        return Role::select('id', 'name')->get();
     }
 }
