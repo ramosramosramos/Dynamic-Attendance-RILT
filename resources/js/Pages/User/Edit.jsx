@@ -20,7 +20,7 @@ export default function Edit({ user, roles }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('users.update',user.id), {
+        post(route('users.update',user.data.id), {
             preserveScroll: true,
             showProgress: false,
             onSuccess: () => {

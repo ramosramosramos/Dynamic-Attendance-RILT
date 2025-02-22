@@ -72,7 +72,8 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update($request->validated());
+        $user->syncRoles([$request->role]);
     }
 
     /**
@@ -85,6 +86,7 @@ class UserController extends Controller
 
     private function getRoles()
     {
-        return Role::select('id', 'name')->get();
+        return Role::where('name', '!=', RoleEnum::ADMIN)
+        ->select('id', 'name')->get();
     }
 }
