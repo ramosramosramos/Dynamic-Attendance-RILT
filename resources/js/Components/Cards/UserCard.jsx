@@ -21,7 +21,10 @@ export default function UserCard({ user }) {
                                 Edit
                             </Dropdown.Link>
                             <Dropdown.Link>
-                                Delete
+                                Archive
+                            </Dropdown.Link>
+                            <Dropdown.Link>
+                                Move to bin
                             </Dropdown.Link>
                         </Dropdown.Content>
                     </Dropdown>

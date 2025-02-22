@@ -84,9 +84,31 @@ class UserController extends Controller
         //
     }
 
+    public function moveArchive(User $user)
+    {
+        $user->update(['archive_at' => now()]);
+    }
+
+    public function restoreArchive(User $user)
+    {
+        $user->update(['archive_at' => null]);
+    }
+
+    public function restore($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $user->restore();
+    }
+
+    public function forceDelete($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $user->forceDelete();
+    }
+
     private function getRoles()
     {
         return Role::where('name', '!=', RoleEnum::ADMIN)
-        ->select('id', 'name')->get();
+            ->select('id', 'name')->get();
     }
 }
