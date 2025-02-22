@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
@@ -16,14 +17,16 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles:id,name')
-        ->whereNull('archive_at')
-        ->whereHas('roles', function ($query) {
-            $query->where('name', '!=', RoleEnum::ADMIN);
-        })->latest()->paginate(20);
-
         return inertia('User/Index', [
-            'users' => UserResource::collection($users),
+            'users' => UserResource::collection(User::getDataUsers()),
+            'roles' => $this->getRoles(),
+        ]);
+    }
+    public function archive()
+    {
+        return inertia('User/Index', [
+            'users' => UserResource::collection(User::getDataUsers()),
+            'roles' => $this->getRoles(),
         ]);
     }
 
@@ -45,22 +48,11 @@ class UserController extends Controller
         $user = User::create(array_merge($request->validated(), [
             'password' => bcrypt($request->role),
         ]));
-        $user->update(['password' => bcrypt($request->role.'_'.$user->id)]);
+        $user->update(['password' => bcrypt($request->role . '_' . $user->id)]);
         $user->assignRole($request->role);
-
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(User $user)
     {
         return inertia('User/Edit', [
@@ -110,7 +102,8 @@ class UserController extends Controller
 
     private function getRoles()
     {
-        return Role::where('name', '!=', RoleEnum::ADMIN)
-            ->select('id', 'name')->get();
+        return Cache::remember('roles', 60 * 60 * 24, function () {
+            return Role::where('name', '!=', RoleEnum::ADMIN)->get();
+        });
     }
 }

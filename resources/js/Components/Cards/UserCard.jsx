@@ -34,6 +34,7 @@ export default function UserCard({ user }) {
                     <span className='flex gap-2'> <AccountCircleIcon /> <p>{user.name}</p></span>
                     <span className='flex gap-2 text-sm'> <EmailIcon /> <p>{user.email}</p></span>
                     <span className='flex gap-2 text-sm'> <QuestionMarkIcon /> <p>{user.role_name}</p></span>
+                    <i className='flex gap-2 text-sm text-gray-600'> Created:<p>{user.created_at}</p></i>
                 </div>
             </div>
 
