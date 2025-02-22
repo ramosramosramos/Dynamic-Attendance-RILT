@@ -61,7 +61,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return inertia('User/Edit', [
+            'user' => new UserResource($user),
+            'roles' => $this->getRoles(),
+        ]);
     }
 
     /**

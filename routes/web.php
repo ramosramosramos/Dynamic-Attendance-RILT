@@ -18,7 +18,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->middleware(['verified'])->name('dashboard');
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->except([ 'update', 'destroy']);
+    Route::post('users/{user}/update', [UserController::class, 'update'])->name('users.update');
+    Route::post('users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 require __DIR__.'/auth.php';

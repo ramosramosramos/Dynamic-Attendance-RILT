@@ -17,7 +17,7 @@ export default function UserCard({ user }) {
                             </spa>
                         </Dropdown.Trigger>
                         <Dropdown.Content>
-                            <Dropdown.Link hfref='#'>
+                            <Dropdown.Link href={route('users.edit', user.id)}>
                                 Edit
                             </Dropdown.Link>
                             <Dropdown.Link>
