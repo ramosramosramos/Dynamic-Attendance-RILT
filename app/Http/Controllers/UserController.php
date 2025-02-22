@@ -18,7 +18,7 @@ class UserController extends Controller
     {
         $users = User::with('roles:id,name')->whereHas('roles', function ($query) {
             $query->where('name', '!=', RoleEnum::ADMIN);
-        })->paginate(20);
+        })->latest()->paginate(20);
 
         return inertia('User/Index', [
             'users' => UserResource::collection($users),
@@ -30,7 +30,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return inertia('User/Create',[
+        return inertia('User/Create', [
             'roles' => $this->getRoles(),
         ]);
     }
@@ -40,7 +40,12 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        //
+        $user = User::create(array_merge($request->validated(), [
+            'password' => bcrypt($request->role),
+        ]));
+        $user->update(['password' => bcrypt($request->role.'_'.$user->id)]);
+        $user->assignRole($request->role);
+
     }
 
     /**

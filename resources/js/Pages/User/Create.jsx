@@ -1,11 +1,10 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
-import UserCard from '@/Components/Cards/UserCard';
 import InputError from '@/Components/Inputs/InputError';
 import InputLabel from '@/Components/Inputs/InputLabel';
 import SelectInput from '@/Components/Inputs/SelectInput';
 import TextInput from '@/Components/Inputs/TextInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, router, useForm } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 
 export default function Create({roles}) {
@@ -20,15 +19,20 @@ export default function Create({roles}) {
     const submit = (e) => {
         e.preventDefault();
 
-        console.log(data);
-        // post(route('users.store'), {
-        //     preserveScroll: true,
-        //     onSuccess: () => toast.success('User created successfully!'),
-        //     onError: (error) => {
-        //         toast.error(error.name);
-        //         toast.error(error.email);
-        //     }
-        // });
+        post(route('users.store'), {
+            preserveScroll: true,
+            showProgress:false,
+            onSuccess: () =>{
+                toast.success('User created successfully!');
+                reset();
+                router.get(route('users.index'));
+            },
+            onError: (error) => {
+                toast.error(error.name);
+                toast.error(error.email);
+                toast.error(error.role);
+            }
+        });
 
     };
 

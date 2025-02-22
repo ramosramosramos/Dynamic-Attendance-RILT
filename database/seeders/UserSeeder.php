@@ -4,10 +4,9 @@ namespace Database\Seeders;
 
 use App\Enum\RoleEnum;
 use App\Models\User;
-use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 use Spatie\Permission\Models\Role;
-
 
 class UserSeeder extends Seeder
 {
@@ -21,7 +20,7 @@ class UserSeeder extends Seeder
         Role::create(['name' => RoleEnum::STUDENT]);
         Role::create(['name' => RoleEnum::USER]);
 
-      $userAdmin =  User::create(
+        $userAdmin = User::create(
             [
                 'name' => 'Kent Jerone Ramos',
                 'email' => 'admin@gmail.com',
