@@ -14,7 +14,9 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $teachers = Teacher::with('user')->paginate(20);
+        $teachers = Teacher::with('user:id,name')
+        ->whereNull('archive_at')
+        ->paginate(20);
 
         return inertia('Teacher/Index',['teachers'=>TeacherResource::collection($teachers)]);
         //

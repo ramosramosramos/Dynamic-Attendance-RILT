@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +17,8 @@ class TeacherResource extends JsonResource
     {
         return [
             'id'=>$this->id,
-            'user'=>$this->user,
+            'name'=>$this->user->name,
+            'created_at'=>Carbon::parse($this->created_at)->diffForHumans(),
         ];
     }
 }
