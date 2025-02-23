@@ -98,7 +98,8 @@ class User extends Authenticatable
             ->appends(request()->query());
     }
 
-    public function teachers(){
+    public function teachers()
+    {
         return $this->hasMany(Teacher::class);
     }
 }

@@ -16,9 +16,8 @@ class Teacher extends Model
         'archive_at',
     ];
 
-
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 }
-

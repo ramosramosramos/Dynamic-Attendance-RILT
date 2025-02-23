@@ -16,9 +16,9 @@ class TeacherResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'name'=>$this->user->name,
-            'created_at'=>Carbon::parse($this->created_at)->diffForHumans(),
+            'id' => $this->id,
+            'name' => $this->user->name,
+            'created_at' => Carbon::parse($this->created_at)->diffForHumans(),
         ];
     }
 }

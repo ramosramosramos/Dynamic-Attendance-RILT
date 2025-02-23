@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Teacher;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Http\Resources\TeacherResource;
+use App\Models\Teacher;
+use App\Models\User;
 
 class TeacherController extends Controller
 {
@@ -15,10 +16,10 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = Teacher::with('user:id,name')
-        ->whereNull('archive_at')
-        ->paginate(20);
+            ->whereNull('archive_at')
+            ->paginate(20);
 
-        return inertia('Teacher/Index',['teachers'=>TeacherResource::collection($teachers)]);
+        return inertia('Teacher/Index', ['teachers' => TeacherResource::collection($teachers)]);
         //
     }
 
@@ -68,5 +69,12 @@ class TeacherController extends Controller
     public function destroy(Teacher $teacher)
     {
         //
+    }
+
+    private function getTeachers()
+    {
+        // $teachers = User::whereHas('roles',function($role){
+        //     return $role->where('name',Role)
+        // })->get();
     }
 }

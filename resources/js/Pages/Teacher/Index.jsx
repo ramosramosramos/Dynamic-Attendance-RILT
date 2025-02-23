@@ -1,6 +1,5 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import TeacherCard from '@/Components/Cards/TeacherCard';
-import UserCard from '@/Components/Cards/UserCard';
 import Dropdown from '@/Components/DropDowns/Dropdown';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
