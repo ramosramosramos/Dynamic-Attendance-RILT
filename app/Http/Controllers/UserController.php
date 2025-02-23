@@ -97,6 +97,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $user->update(['archive_at' => null]);
         $user->delete();
     }
 

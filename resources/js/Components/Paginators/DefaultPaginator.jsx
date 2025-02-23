@@ -14,7 +14,7 @@ const form = useForm({});
     form.get(url, { page: value }, { preserveScroll: true });
   };
 
-  return (
+  return ( !meta.total != 0 ? null :
     <Stack spacing={2}>
       <Pagination count={meta?.last_page} page={page} onChange={handleChange} />
     </Stack>
