@@ -47,7 +47,7 @@ export default function Index({ teachers, filters }) {
 
 
                     </div>
-                    <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ">
+                    <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-3 md:grid-cols-3 sm:grid-cols-1 ">
 
                         {teachers.data.length > 0 ?
                             teachers.data?.map((teacher) => (
