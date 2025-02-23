@@ -19,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Dashboard');
     })->middleware(['verified'])->name('dashboard');
     Route::resource('users', UserController::class)->except(['update', 'destroy']);
+    Route::get('users/archive/data', [UserController::class, 'archive'])->name('users.archive');
     Route::post('users/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::post('users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('users/{user}/moveArchive', [UserController::class, 'moveArchive'])->name('users.moveArchive');

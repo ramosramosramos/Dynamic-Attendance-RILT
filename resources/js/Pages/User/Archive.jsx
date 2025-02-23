@@ -2,11 +2,10 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import UserCard from '@/Components/Cards/UserCard';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import SelectSearch from '@/Components/Inputs/SelectSearch';
-import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router } from '@inertiajs/react';
 
-export default function Index({ users,roles, filters }) {
+export default function Archive({ users,roles, filters }) {
     return (
         <AuthenticatedLayout
             header={
@@ -43,7 +42,6 @@ export default function Index({ users,roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.index')}/>
                 </div>
             </div>
         </AuthenticatedLayout>
