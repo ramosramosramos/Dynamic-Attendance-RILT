@@ -97,4 +97,8 @@ class User extends Authenticatable
             ->paginate(20)
             ->appends(request()->query());
     }
+
+    public function teachers(){
+        return $this->hasMany(Teacher::class);
+    }
 }

@@ -37,6 +37,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Users
                                 </NavLink>
+                                <NavLink
+                                    href={route('teachers.index')}
+                                    active={url.startsWith('/teachers')}
+                                >
+                                    Teachers
+                                </NavLink>
                             </div>
                         </div>
 

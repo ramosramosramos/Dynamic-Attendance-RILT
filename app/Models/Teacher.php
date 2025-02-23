@@ -13,5 +13,12 @@ class Teacher extends Model
 
     protected $fillable = [
         'user_id',
+        'archive_at',
     ];
+
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
+
