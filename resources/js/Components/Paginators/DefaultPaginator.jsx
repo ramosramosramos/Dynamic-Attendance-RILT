@@ -4,7 +4,7 @@ import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import { router } from '@inertiajs/react';
 
-export default function DefaultPaginator({ meta, url }) {
+export default function DefaultPaginator({ meta, url ,filters}) {
   // meta is expected to contain current_page and last_page
   const [page, setPage] = React.useState(meta?.current_page);
 
@@ -12,7 +12,7 @@ export default function DefaultPaginator({ meta, url }) {
     setPage(value);
 
     // Navigate to the new page using Inertia
-    router.get(url, { page: value }, { preserveScroll: true });
+    router.get(url, { page: value , search: filters?.search ?? '',role:filters?.role ?? ''}, { preserveScroll: true });
   };
 
   return ( !meta.total != 0 ? null :

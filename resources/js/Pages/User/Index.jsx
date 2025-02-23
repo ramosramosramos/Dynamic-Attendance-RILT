@@ -60,7 +60,7 @@ export default function Index({ users, roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.index')} />
+                    <DefaultPaginator meta={users.meta} url={route('users.index')} filters={filters} />
                 </div>
             </div>
         </AuthenticatedLayout>

@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
         User::factory(100)->create();
         $users = User::whereNotIn('id', [$userAdmin->id])->get();
         $users->each(function ($user) {
-            $user->assignRole(RoleEnum::USER);
+            $user->assignRole(fake()->randomElement([RoleEnum::STUDENT,RoleEnum::TEACHER]));
         });
     }
 }
