@@ -29,6 +29,15 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]
         )->assignRole(RoleEnum::ADMIN);
+        $user = User::create(
+            [
+                'name' => 'Kent Jerone Ramos',
+                'email' => 'user@gmail.com',
+                'email_verified_at' => now(),
+                'password' => bcrypt('password'),
+                'remember_token' => Str::random(10),
+            ]
+        )->assignRole(RoleEnum::USER);
 
         User::factory(100)->create();
         $users = User::whereNotIn('id', [$userAdmin->id])->get();

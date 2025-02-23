@@ -2,16 +2,17 @@ import * as React from 'react';
 
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
-import { useForm } from '@inertiajs/react';
+import { router } from '@inertiajs/react';
 
 export default function DefaultPaginator({ meta, url }) {
   // meta is expected to contain current_page and last_page
   const [page, setPage] = React.useState(meta?.current_page);
-const form = useForm({});
+
   const handleChange = (event, value) => {
     setPage(value);
+
     // Navigate to the new page using Inertia
-    form.get(url, { page: value }, { preserveScroll: true });
+    router.get(url, { page: value }, { preserveScroll: true });
   };
 
   return ( !meta.total != 0 ? null :

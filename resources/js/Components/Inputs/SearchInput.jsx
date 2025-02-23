@@ -45,7 +45,7 @@ export default function SearchInput({ items, url, filters }) {
 
     }
 
-    console.log(filters.search);
+
     return (
         <form onSubmit={submit}>
             <Autocomplete

@@ -18,6 +18,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->middleware(['verified'])->name('dashboard');
+
+
+Route::middleware(['admin'])->group(function(){
     Route::resource('users', UserController::class)->except(['update', 'destroy']);
     Route::get('users/archive/data', [UserController::class, 'archive'])->name('users.archive');
     Route::get('users/bin/data', [UserController::class, 'bin'])->name('users.bin');
@@ -27,6 +30,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/{user}/restoreArchive', [UserController::class, 'restoreArchive'])->name('users.restoreArchive');
     Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::post('users/{id}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
+});
+
 });
 
 require __DIR__.'/auth.php';
