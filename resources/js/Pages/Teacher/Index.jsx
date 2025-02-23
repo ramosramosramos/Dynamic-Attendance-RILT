@@ -1,4 +1,5 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
+import TeacherCard from '@/Components/Cards/TeacherCard';
 import UserCard from '@/Components/Cards/UserCard';
 import Dropdown from '@/Components/DropDowns/Dropdown';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
@@ -21,7 +22,7 @@ export default function Index({ teachers, filters }) {
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 flex justify-between items-center">
                             <PrimaryButton onClick={() => router.get(route('teachers.create'))}>
-                                Create new user
+                                Create new teacher
                             </PrimaryButton>
 
                             <Dropdown>
@@ -49,9 +50,9 @@ export default function Index({ teachers, filters }) {
                     <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ">
 
                         {teachers.data.length > 0 ?
-                            teachers.data?.map((user) => (
-                                <div key={user.id}>
-                                    <UserCard user={user} />
+                            teachers.data?.map((teacher) => (
+                                <div key={teacher.id}>
+                                    <TeacherCard teacher={teacher} />
                                 </div>
                             )) : <p className='text-slate-700'>No data found</p>
                         }

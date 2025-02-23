@@ -71,7 +71,7 @@ class User extends Authenticatable
                 $query->where('name', '!=', RoleEnum::ADMIN);
             })
             ->latest()
-            ->paginate(20)
+            ->paginate(21)
             ->appends(request()->query());
     }
 
@@ -94,7 +94,7 @@ class User extends Authenticatable
                 $query->where('name', '!=', RoleEnum::ADMIN);
             })
             ->latest()
-            ->paginate(20)
+            ->paginate(21)
             ->appends(request()->query());
     }
 
