@@ -106,8 +106,9 @@ class UserController extends Controller
 
     private function getRoles()
     {
+        
         return Cache::remember('roles', 60 * 60 * 24, function () {
-            return Role::where('name', '!=', RoleEnum::ADMIN)->get();
+            return Role::where('name', '!=', RoleEnum::ADMIN)->select(['id','name'])->get();
         });
     }
 }

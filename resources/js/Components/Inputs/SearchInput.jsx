@@ -39,7 +39,9 @@ export default function SearchInput({ items, url, filters }) {
 
     const submit = (e) => {
         e.preventDefault();
-        get(url);
+        get(url,{
+            preserveScroll:true,
+        });
 
     }
 
