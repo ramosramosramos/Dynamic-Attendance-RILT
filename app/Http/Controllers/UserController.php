@@ -40,6 +40,19 @@ class UserController extends Controller
         ]);
     }
 
+    public function bin()
+    {
+
+        return inertia('User/Bin', [
+            'users' => UserResource::collection(User::onlyTrashed()->getDataUsers()),
+            'roles' => $this->getRoles(),
+            'filters' => [
+                'search' => request()->input('search'),
+                'role' => request()->input('role'),
+            ],
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

@@ -36,6 +36,9 @@ export default function Index({ users, roles, filters }) {
                                     <Dropdown.Link href={route('users.archive')}>
                                         Archive
                                     </Dropdown.Link>
+                                    <Dropdown.Link href={route('users.bin')}>
+                                        Bin
+                                    </Dropdown.Link>
                                 </Dropdown.Content>
                             </Dropdown>
                         </div>

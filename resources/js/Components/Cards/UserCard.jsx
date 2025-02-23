@@ -42,6 +42,17 @@ export default function UserCard({ user }) {
                                     </Dropdown.Link>
                                 </>
                             }
+                            {route().current('users.bin') &&
+                                <>
+
+                                    <Dropdown.Link onSuccess={() => toast.success("Successfully restored from bin.")} method="post" href={route('users.restore', user.id)}>
+                                        Restore from bin
+                                    </Dropdown.Link>
+                                    <Dropdown.Link onSuccess={() => toast.success("Permanently deleted.")} method="post" href={route('users.forceDelete', user.id)}>
+                                       Permanently delete
+                                    </Dropdown.Link>
+                                </>
+                            }
                         </Dropdown.Content>
                     </Dropdown>
                 </div>

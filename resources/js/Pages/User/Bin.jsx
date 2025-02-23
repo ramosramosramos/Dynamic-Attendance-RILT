@@ -7,16 +7,16 @@ import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Archive({ users, roles, filters }) {
+export default function Bin({ users, roles, filters }) {
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Users | Archive
+                    Users | Bin
                 </h2>
             }
         >
-            <Head title="Users | Archive" />
+            <Head title="Users | Bin" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -27,8 +27,8 @@ export default function Archive({ users, roles, filters }) {
                             </BackLink>
                         </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
-                            <SearchInput items={users.data} url={route('users.archive')} filters={filters} />
-                            <SelectSearch items={roles} url={route('users.archive')} filters={filters} />
+                            <SearchInput items={users.data} url={route('users.bin')} filters={filters} />
+                            <SelectSearch items={roles} url={route('users.bin')} filters={filters} />
                         </div>
 
 
@@ -44,7 +44,7 @@ export default function Archive({ users, roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.archive')} />
+                    <DefaultPaginator meta={users.meta} url={route('users.bin')} />
                 </div>
             </div>
         </AuthenticatedLayout>
