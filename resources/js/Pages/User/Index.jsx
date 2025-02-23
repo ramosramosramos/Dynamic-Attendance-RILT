@@ -26,7 +26,7 @@ export default function Index({ users,roles, filters }) {
                         </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
                             <SearchInput items={users.data} url={route('users.index')} filters={filters} />
-                            <SelectSearch items={roles} />
+                            <SelectSearch items={roles} url={route('users.index')} filters={filters} />
                         </div>
 
 

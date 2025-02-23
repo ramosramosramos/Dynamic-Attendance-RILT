@@ -21,11 +21,13 @@ class UserController extends Controller
         return inertia('User/Index', [
             'users' => UserResource::collection(User::getDataUsers()),
             'roles' => $this->getRoles(),
-            'filters'=>[
-                'search'=>request()->input('search'),
-            ]
+            'filters' => [
+                'search' => request()->input('search'),
+                'role' => request()->input('role'),
+            ],
         ]);
     }
+
     public function archive()
     {
         return inertia('User/Index', [
@@ -52,10 +54,9 @@ class UserController extends Controller
         $user = User::create(array_merge($request->validated(), [
             'password' => bcrypt($request->role),
         ]));
-        $user->update(['password' => bcrypt($request->role . '_' . $user->id)]);
+        $user->update(['password' => bcrypt($request->role.'_'.$user->id)]);
         $user->assignRole($request->role);
     }
-
 
     public function edit(User $user)
     {
@@ -106,9 +107,9 @@ class UserController extends Controller
 
     private function getRoles()
     {
-        
+
         return Cache::remember('roles', 60 * 60 * 24, function () {
-            return Role::where('name', '!=', RoleEnum::ADMIN)->select(['id','name'])->get();
+            return Role::where('name', '!=', RoleEnum::ADMIN)->select(['id', 'name'])->get();
         });
     }
 }

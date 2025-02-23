@@ -55,19 +55,30 @@ class User extends Authenticatable
     public function scopeGetDataUsers($query)
     {
         $search = request()->input('search');
-        return  $query->with('roles:id,name')
-            ->when($search,function($querySearch) use ($search){
-                $querySearch->where('name','like','%'.$search.'%');
+        $role = request()->input('role');
+
+        return $query->with('roles:id,name')
+            ->when($search, function ($query) use ($search) {
+                $query->where('name', 'like', '%'.$search.'%');
+            })
+            ->when($role, function ($query) use ($role) {
+                $query->whereHas('roles', function ($q) use ($role) {
+                    $q->where('name', 'like', '%'.$role.'%');
+                });
             })
             ->whereNull('archive_at')
             ->whereHas('roles', function ($query) {
                 $query->where('name', '!=', RoleEnum::ADMIN);
-            })->latest()->paginate(20)->appends(request()->query());
+            })
+            ->latest()
+            ->paginate(20)
+            ->appends(request()->query());
     }
+
     public function scopeGetArchiveDataUsers($query)
     {
-        return  $query->with('roles:id,name')
-            ->where('archive_at','!=',null)
+        return $query->with('roles:id,name')
+            ->where('archive_at', '!=', null)
             ->whereHas('roles', function ($query) {
                 $query->where('name', '!=', RoleEnum::ADMIN);
             })->latest()->paginate(20);

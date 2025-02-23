@@ -23,7 +23,7 @@ export default function SearchInput({ items, url, filters }) {
         setOpen(true);
         (async () => {
             setLoading(true);
-            await sleep(1e3); // For demo purposes.
+
             setLoading(false);
 
             setOptions([...items]);
@@ -35,7 +35,7 @@ export default function SearchInput({ items, url, filters }) {
         setOptions([]);
     };
 
-    const { data, setData, get } = useForm({ search: filters?.search ?? '' });
+    const { data, setData, get } = useForm({ search: filters?.search ?? '',role:filters?.role ?? '' });
 
     const submit = (e) => {
         e.preventDefault();
@@ -50,7 +50,7 @@ export default function SearchInput({ items, url, filters }) {
         <form onSubmit={submit}>
             <Autocomplete
             autoFocus
-                sx={{ width: 300 }}
+                sx={{ width: 300, }}
                 open={open}
                 onOpen={handleOpen}
                 onClose={handleClose}
