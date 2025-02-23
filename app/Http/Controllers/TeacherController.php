@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\PermissionEnum;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Http\Resources\TeacherResource;
 use App\Models\Teacher;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
 
 class TeacherController extends Controller
 {
@@ -15,6 +17,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
+
+
         $teachers = Teacher::with('user:id,name')
             ->whereNull('archive_at')
             ->paginate(20);

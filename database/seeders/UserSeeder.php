@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Enum\PermissionEnum;
 use App\Enum\RoleEnum;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
@@ -15,12 +17,18 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create(['name' => RoleEnum::ADMIN]);
-        Role::create(['name' => RoleEnum::TEACHER]);
-        Role::create(['name' => RoleEnum::STUDENT]);
-        Role::create(['name' => RoleEnum::USER]);
 
-        $userAdmin = User::create(
+
+        $this->createRoles();
+        $this->createPermmisions();
+        User::factory(100)->create();
+        $this->createStudentsAndTeachers();
+    }
+
+
+    public function getAdmin()
+    {
+        return User::create(
             [
                 'name' => 'Kent Jerone Ramos',
                 'email' => 'admin@gmail.com',
@@ -29,20 +37,26 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]
         )->assignRole(RoleEnum::ADMIN);
-        $user = User::create(
-            [
-                'name' => 'Kent Jerone Ramos',
-                'email' => 'user@gmail.com',
-                'email_verified_at' => now(),
-                'password' => bcrypt('password'),
-                'remember_token' => Str::random(10),
-            ]
-        )->assignRole(RoleEnum::USER);
-
-        User::factory(100)->create();
-        $users = User::whereNotIn('id', [$userAdmin->id])->get();
+    }
+    public function createStudentsAndTeachers()
+    {
+        $users = User::whereNotIn('id', [$this->getAdmin()->id])->get();
         $users->each(function ($user) {
             $user->assignRole(fake()->randomElement([RoleEnum::STUDENT, RoleEnum::TEACHER]));
         });
+    }
+
+    public function createRoles()
+    {
+
+        foreach (RoleEnum::cases() as $role) {
+            Role::create(['name' => $role->value]);
+        }
+    }
+    public function createPermmisions()
+    {
+        foreach (PermissionEnum::cases() as $permission) {
+            Permission::create(['name' => $permission->value]);
+        }
     }
 }
