@@ -14,7 +14,7 @@ function sleep(duration) {
     });
 }
 
-export default function SearchInput( {items ,url}) {
+export default function SearchInput({ items, url, filters }) {
     const [open, setOpen] = React.useState(false);
     const [options, setOptions] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
@@ -35,7 +35,7 @@ export default function SearchInput( {items ,url}) {
         setOptions([]);
     };
 
-    const { data, setData,get } = useForm({ search: '' });
+    const { data, setData, get } = useForm({ search: filters?.search ?? '' });
 
     const submit = (e) => {
         e.preventDefault();
@@ -43,9 +43,11 @@ export default function SearchInput( {items ,url}) {
 
     }
 
+    console.log(filters.search);
     return (
         <form onSubmit={submit}>
             <Autocomplete
+            autoFocus
                 sx={{ width: 300 }}
                 open={open}
                 onOpen={handleOpen}
@@ -54,12 +56,15 @@ export default function SearchInput( {items ,url}) {
                 getOptionLabel={(option) => option.name}
                 options={options}
                 loading={loading}
+                inputValue={data.search}
                 onChange={(e) => setData('search', e.target.textContent)}
                 renderInput={(params) => (
                     <TextField
                         {...params}
                         onChange={(e) => setData('search', e.target.value)}
-                        label="Asynchronous"
+                        value={data.search}
+                        label="Search name"
+                        autoFocus
                         slotProps={{
                             input: {
                                 ...params.InputProps,

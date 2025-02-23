@@ -4,7 +4,7 @@ import SearchInput from '@/Components/Inputs/SearchInput';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router } from '@inertiajs/react';
 
-export default function Index({ users }) {
+export default function Index({ users ,filters}) {
     return (
         <AuthenticatedLayout
             header={
@@ -24,7 +24,7 @@ export default function Index({ users }) {
                           </PrimaryButton>
                         </div>
                         <div className="p-6 text-gray-900">
-                      <SearchInput items={users.data} url = {route('users.index')}/>
+                      <SearchInput items={users.data} url = {route('users.index')} filters={filters} />
                         </div>
                     </div>
                     <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 ">

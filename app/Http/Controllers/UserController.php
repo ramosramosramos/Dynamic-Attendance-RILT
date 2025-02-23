@@ -17,10 +17,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        // dd(request()->input('search'));
+
         return inertia('User/Index', [
             'users' => UserResource::collection(User::getDataUsers()),
             'roles' => $this->getRoles(),
+            'filters'=>[
+                'search'=>request()->input('search'),
+            ]
         ]);
     }
     public function archive()

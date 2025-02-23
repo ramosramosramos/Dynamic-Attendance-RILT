@@ -54,11 +54,15 @@ class User extends Authenticatable
 
     public function scopeGetDataUsers($query)
     {
+        $search = request()->input('search');
         return  $query->with('roles:id,name')
+            ->when($search,function($querySearch) use ($search){
+                $querySearch->where('name','like','%'.$search.'%');
+            })
             ->whereNull('archive_at')
             ->whereHas('roles', function ($query) {
                 $query->where('name', '!=', RoleEnum::ADMIN);
-            })->latest()->paginate(20);
+            })->latest()->paginate(20)->appends(request()->query());
     }
     public function scopeGetArchiveDataUsers($query)
     {
