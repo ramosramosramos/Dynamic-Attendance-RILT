@@ -2,11 +2,12 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import UserCard from '@/Components/Cards/UserCard';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import SelectSearch from '@/Components/Inputs/SelectSearch';
+import BackLink from '@/Components/Links/BackLink';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
-export default function Archive({ users,roles, filters }) {
+export default function Archive({ users, roles, filters }) {
     return (
         <AuthenticatedLayout
             header={
@@ -20,7 +21,11 @@ export default function Archive({ users,roles, filters }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-
+                        <div className="p-6 text-gray-900">
+                            <BackLink href={route('users.index')}>
+                                Go back to users
+                            </BackLink>
+                        </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
                             <SearchInput items={users.data} url={route('users.archive')} filters={filters} />
                             <SelectSearch items={roles} url={route('users.archive')} filters={filters} />
@@ -39,7 +44,7 @@ export default function Archive({ users,roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.archive')}/>
+                    <DefaultPaginator meta={users.meta} url={route('users.archive')} />
                 </div>
             </div>
         </AuthenticatedLayout>
