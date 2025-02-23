@@ -23,6 +23,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('users/{user}/update', [UserController::class, 'update'])->name('users.update');
     Route::post('users/{user}/destroy', [UserController::class, 'destroy'])->name('users.destroy');
     Route::post('users/{user}/moveArchive', [UserController::class, 'moveArchive'])->name('users.moveArchive');
+    Route::post('users/{user}/restoreArchive', [UserController::class, 'restoreArchive'])->name('users.restoreArchive');
     Route::post('users/{id}/restore', [UserController::class, 'restore'])->name('users.restore');
     Route::post('users/{id}/forceDelete', [UserController::class, 'forceDelete'])->name('users.forceDelete');
 });

@@ -2,31 +2,28 @@ import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import UserCard from '@/Components/Cards/UserCard';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import SelectSearch from '@/Components/Inputs/SelectSearch';
+import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, router } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 
 export default function Archive({ users,roles, filters }) {
     return (
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Users
+                    Users | Archive
                 </h2>
             }
         >
-            <Head title="Users" />
+            <Head title="Users | Archive" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900">
-                            <PrimaryButton onClick={() => router.get(route('users.create'))}>
-                                Create new user
-                            </PrimaryButton>
-                        </div>
+
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
-                            <SearchInput items={users.data} url={route('users.index')} filters={filters} />
-                            <SelectSearch items={roles} url={route('users.index')} filters={filters} />
+                            <SearchInput items={users.data} url={route('users.archive')} filters={filters} />
+                            <SelectSearch items={roles} url={route('users.archive')} filters={filters} />
                         </div>
 
 
@@ -42,6 +39,7 @@ export default function Archive({ users,roles, filters }) {
                         }
 
                     </div>
+                    <DefaultPaginator meta={users.meta} url={route('users.archive')}/>
                 </div>
             </div>
         </AuthenticatedLayout>

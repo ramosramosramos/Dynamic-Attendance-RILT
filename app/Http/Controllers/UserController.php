@@ -31,7 +31,7 @@ class UserController extends Controller
     public function archive()
     {
         return inertia('User/Archive', [
-            'users' => UserResource::collection(User::getDataUsers()),
+            'users' => UserResource::collection(User::getArchiveDataUsers()),
             'roles' => $this->getRoles(),
             'filters' => [
                 'search' => request()->input('search'),

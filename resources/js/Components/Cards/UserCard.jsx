@@ -18,15 +18,30 @@ export default function UserCard({ user }) {
                             </span>
                         </Dropdown.Trigger>
                         <Dropdown.Content>
-                            <Dropdown.Link href={route('users.edit', user.id)}>
-                                Edit
-                            </Dropdown.Link>
-                            <Dropdown.Link onSuccess= {()=>toast.success("Successfully move to archive.")}  method="post" href={route('users.moveArchive', user.id)}>
-                                Archive
-                            </Dropdown.Link>
-                            <Dropdown.Link  onSuccess= {()=>toast.success("Successfully move to bin.")}  method="post" href={route('users.destroy', user.id)}>
-                                Move to bin
-                            </Dropdown.Link>
+                            {route().current('users.index') &&
+                                <>
+                                    <Dropdown.Link href={route('users.edit', user.id)}>
+                                        Edit
+                                    </Dropdown.Link>
+                                    <Dropdown.Link onSuccess={() => toast.success("Successfully move to archive.")} method="post" href={route('users.moveArchive', user.id)}>
+                                        Archive
+                                    </Dropdown.Link>
+                                    <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('users.destroy', user.id)}>
+                                        Move to bin
+                                    </Dropdown.Link>
+                                </>
+                            }
+                            {route().current('users.archive') &&
+                                <>
+
+                                    <Dropdown.Link onSuccess={() => toast.success("Successfully restored from archive.")} method="post" href={route('users.restoreArchive', user.id)}>
+                                        Restore from archive
+                                    </Dropdown.Link>
+                                    <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('users.destroy', user.id)}>
+                                        Move to bin
+                                    </Dropdown.Link>
+                                </>
+                            }
                         </Dropdown.Content>
                     </Dropdown>
                 </div>

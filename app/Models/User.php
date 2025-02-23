@@ -89,7 +89,7 @@ class User extends Authenticatable
                     $q->where('name', 'like', '%'.$role.'%');
                 });
             })
-            ->whereNull('archive_at')
+            ->whereNotNull('archive_at')
             ->whereHas('roles', function ($query) {
                 $query->where('name', '!=', RoleEnum::ADMIN);
             })
