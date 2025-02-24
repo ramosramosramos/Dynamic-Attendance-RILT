@@ -18,13 +18,13 @@ class TeacherController extends Controller
     public function index()
     {
 
-        $teachers = Teacher::with('user:id,name')
-            ->whereNull('archive_at')
-            ->latest()
-            ->paginate(21);
+        return inertia('Teacher/Index', [
+            'teachers' => TeacherResource::collection(Teacher::query()->active()->getTeachers()),
+            'filters' => [
+                'search' => request('search', ''),
+            ],
+        ]);
 
-        return inertia('Teacher/Index', ['teachers' => TeacherResource::collection($teachers)]);
-        //
     }
 
     /**
@@ -80,6 +80,7 @@ class TeacherController extends Controller
         $teacher->update(['archive_at' => null]);
         $teacher->delete();
     }
+
     public function moveArchive(Teacher $teacher)
     {
         $teacher->update(['archive_at' => now()]);
@@ -101,6 +102,7 @@ class TeacherController extends Controller
         $teacher = Teacher::withTrashed()->find($id);
         $teacher->forceDelete();
     }
+
     private function getTeachers()
     {
         return Cache::remember('teachers', now()->addHours(24), function () {

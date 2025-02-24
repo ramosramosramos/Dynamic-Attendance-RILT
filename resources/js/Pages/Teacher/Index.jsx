@@ -1,11 +1,13 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import TeacherCard from '@/Components/Cards/TeacherCard';
 import Dropdown from '@/Components/DropDowns/Dropdown';
+import SearchInput from '@/Components/Inputs/SearchInput';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router } from '@inertiajs/react';
 import MenuIcon from '@mui/icons-material/Menu';
 export default function Index({ teachers, filters }) {
+    const filteredArrays = { search: filters?.search ?? '' };
     return (
         <AuthenticatedLayout
             header={
@@ -41,7 +43,7 @@ export default function Index({ teachers, filters }) {
                             </Dropdown>
                         </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
-
+                            <SearchInput items={teachers.data} url={route('teachers.index')} filters={filteredArrays} />
                         </div>
 
 

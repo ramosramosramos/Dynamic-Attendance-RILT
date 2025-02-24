@@ -2,7 +2,6 @@
 
 namespace App\Observers;
 
-use App\Enum\RoleEnum;
 use App\Models\User;
 
 class UserObserver
@@ -13,7 +12,6 @@ class UserObserver
     public function created(User $user): void
     {
 
-
         cache()->forget('teachers');
     }
 
@@ -22,7 +20,6 @@ class UserObserver
      */
     public function updated(User $user): void
     {
-
 
         cache()->forget('teachers');
     }

@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(\App\Observers\UserObserver::class);
-        
+
         Vite::prefetch(concurrency: 3);
     }
 }
