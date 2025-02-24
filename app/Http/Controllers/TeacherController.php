@@ -56,10 +56,11 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        $user  = [
-            'id'=>$teacher->id,
-            'user_id'=>$teacher->user_id,
+        $user = [
+            'id' => $teacher->id,
+            'user_id' => $teacher->user_id,
         ];
+
         return inertia('Teacher/Edit', ['teachers' => $this->getTeachers(), 'user' => $user]);
     }
 
