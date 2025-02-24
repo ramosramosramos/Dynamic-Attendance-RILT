@@ -26,11 +26,24 @@ class TeacherController extends Controller
         ]);
 
     }
+
     public function archive()
     {
 
         return inertia('Teacher/Archive', [
             'teachers' => TeacherResource::collection(Teacher::query()->inActive()->getTeachers()),
+            'filters' => [
+                'search' => request('search', ''),
+            ],
+        ]);
+
+    }
+
+    public function bin()
+    {
+
+        return inertia('Teacher/Bin', [
+            'teachers' => TeacherResource::collection(Teacher::query()->onlyTrashed()->getTeachers()),
             'filters' => [
                 'search' => request('search', ''),
             ],

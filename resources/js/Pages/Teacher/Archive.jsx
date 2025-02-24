@@ -1,12 +1,10 @@
-import PrimaryButton from '@/Components/Buttons/PrimaryButton';
+
 import TeacherCard from '@/Components/Cards/TeacherCard';
-import Dropdown from '@/Components/DropDowns/Dropdown';
 import SearchInput from '@/Components/Inputs/SearchInput';
 import BackLink from '@/Components/Links/BackLink';
 import DefaultPaginator from '@/Components/Paginators/DefaultPaginator';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, router } from '@inertiajs/react';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Head } from '@inertiajs/react';
 export default function Archive({ teachers, filters }) {
     const filteredArrays = { search: filters?.search ?? '' };
     return (

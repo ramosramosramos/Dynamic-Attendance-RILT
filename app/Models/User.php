@@ -52,7 +52,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function  scopeActive($query)
+    public function scopeActive($query)
     {
         return $query->whereNull('archive_at');
     }
@@ -61,6 +61,7 @@ class User extends Authenticatable
     {
         return $query->whereNotNull('archive_at');
     }
+
     public function scopeGetDataUsers($query)
     {
         $search = request()->input('search');
@@ -82,7 +83,6 @@ class User extends Authenticatable
             ->paginate(21)
             ->appends(request()->query());
     }
-
 
     public function teachers()
     {
