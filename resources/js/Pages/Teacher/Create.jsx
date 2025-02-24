@@ -1,37 +1,34 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import InputError from '@/Components/Inputs/InputError';
 import InputLabel from '@/Components/Inputs/InputLabel';
-import SelectInput from '@/Components/Inputs/SelectInput';
-import TextInput from '@/Components/Inputs/TextInput';
 import BackLink from '@/Components/Links/BackLink';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, useForm } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 
-export default function Create({roles}) {
+export default function Create({ teachers }) {
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
-        email: '',
-        role: '',
+
+        user_id: '',
+
 
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('users.store'), {
+        post(route('teachers.store'), {
             preserveScroll: true,
-            showProgress:false,
-            onSuccess: () =>{
-                toast.success('User created successfully!');
+            showProgress: false,
+            onSuccess: () => {
+                toast.success('Teacher created successfully!');
                 reset();
-                router.get(route('users.index'));
+                router.get(route('teachers.index'));
             },
             onError: (error) => {
-                toast.error(error.name);
-                toast.error(error.email);
-                toast.error(error.role);
+                toast.error(error.user_id);
+
             }
         });
 
@@ -41,71 +38,48 @@ export default function Create({roles}) {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Create | User
+                    Create | Teacher
                 </h2>
             }
         >
-            <Head title="Create | User" />
+            <Head title="Create | Teacher" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                        <BackLink href={route('users.index')}>
-                            Go back to users
-                        </BackLink>
+                            <BackLink href={route('teachers.index')}>
+                                Go back to teachers
+                            </BackLink>
                         </div>
                     </div>
                     <div className="mt-3 overflow-hidden rounded-lg p-5 bg-white grid gap-5 lg:grid-cols-2 sm:grid-cols-1 ">
 
 
                         <form onSubmit={submit} className='w-full'>
-                            <div>
-                                <InputLabel htmlFor="name" value="Name" />
 
-                                <TextInput
-                                    id="name"
-                                    name="name"
-                                    value={data.name}
-                                    className="mt-1 block w-full"
-                                    autoComplete="name"
-                                    isFocused={true}
-                                    onChange={(e) => setData('name', e.target.value)}
-
-                                />
-
-                                <InputError message={errors.name} className="mt-2" />
-                            </div>
 
                             <div className="mt-4">
-                                <InputLabel htmlFor="email" value="Email" />
+                                <InputLabel htmlFor="teacher" value="Teacher" />
 
-                                <TextInput
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value={data.email}
-                                    className="mt-1 block w-full"
-                                    autoComplete="username"
-                                    onChange={(e) => setData('email', e.target.value)}
+                                <select  value={data.user_id} onChange={(e) => setData('user_id', e.target.value)}
 
-                                />
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
+                                >
+                                    <option value={''}>{"Select teacher"}</option>
+                                    {teachers?.map((teacher) => (
+                                        <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
+                                    ))}
+                                </select>
 
-                                <InputError message={errors.email} className="mt-2" />
-                            </div>
-                            <div className="mt-4">
-                                <InputLabel htmlFor="role" value="Role" />
-
-                              <SelectInput  value={data.role}  onChange={(e) => setData('role', e.target.value)} items={roles}/>
-
-                                <InputError message={errors.role} className="mt-2" />
+                                <InputError message={errors.user_id} className="mt-2" />
                             </div>
 
 
                             <div className="mt-4 flex items-center justify-start">
 
 
-                                <PrimaryButton  disabled={processing}>
+                                <PrimaryButton disabled={processing}>
                                     Create
                                 </PrimaryButton>
                             </div>

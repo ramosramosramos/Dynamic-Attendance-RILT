@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('status')->default('active');
             $table->timestamp('archive_at')->nullable();
             $table->softDeletes();
             $table->timestamps();

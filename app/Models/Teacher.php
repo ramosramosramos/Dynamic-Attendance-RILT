@@ -13,11 +13,12 @@ class Teacher extends Model
 
     protected $fillable = [
         'user_id',
+        'status',
         'archive_at',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withTrashed();
     }
 }

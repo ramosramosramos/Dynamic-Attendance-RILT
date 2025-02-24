@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\RoleEnum;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 use App\Http\Resources\TeacherResource;
 use App\Models\Teacher;
 use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class TeacherController extends Controller
 {
@@ -18,7 +20,8 @@ class TeacherController extends Controller
 
         $teachers = Teacher::with('user:id,name')
             ->whereNull('archive_at')
-            ->paginate(20);
+            ->latest()
+            ->paginate(21);
 
         return inertia('Teacher/Index', ['teachers' => TeacherResource::collection($teachers)]);
         //
@@ -29,7 +32,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Teacher/Create', ['teachers' => $this->getTeachers()]);
     }
 
     /**
@@ -37,7 +40,7 @@ class TeacherController extends Controller
      */
     public function store(StoreTeacherRequest $request)
     {
-        //
+        Teacher::create($request->validated());
     }
 
     /**
@@ -74,8 +77,10 @@ class TeacherController extends Controller
 
     private function getTeachers()
     {
-        // $teachers = User::whereHas('roles',function($role){
-        //     return $role->where('name',Role)
-        // })->get();
+        return Cache::remember('teachers', now()->addHours(24), function () {
+            return  User::whereHas('roles', function ($role) {
+                return $role->where('name', RoleEnum::TEACHER);
+            })->select(['id', 'name'])->orderBy('name', 'asc')->get();
+        });
     }
 }
