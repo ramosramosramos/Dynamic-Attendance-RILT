@@ -19,7 +19,7 @@ class TeacherSeeder extends Seeder
         })->get();
 
         $teachers->each(function ($teacher) {
-            Teacher::create(['user_id' => $teacher->id]);
+            Teacher::createQuietly(['user_id' => $teacher->id]);
         });
     }
 }

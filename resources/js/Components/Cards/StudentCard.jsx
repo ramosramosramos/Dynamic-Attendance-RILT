@@ -2,7 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Dropdown from '../DropDowns/Dropdown';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { toast } from 'react-toastify';
-export default function TeacherCard({ teacher }) {
+export default function StudentCard({ student }) {
 
     return (
         <>
@@ -17,37 +17,37 @@ export default function TeacherCard({ teacher }) {
                                 </span>
                             </Dropdown.Trigger>
                             <Dropdown.Content>
-                                {route().current('teachers.index') &&
+                                {route().current('students.index') &&
                                     <>
-                                        <Dropdown.Link href={route('teachers.edit', teacher.id)}>
+                                        <Dropdown.Link href={route('students.edit', student.id)}>
                                             Edit
                                         </Dropdown.Link>
-                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to archive.")} method="post" href={route('teachers.moveArchive', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to archive.")} method="post" href={route('students.moveArchive', student.id)}>
                                             Archive
                                         </Dropdown.Link>
-                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('teachers.destroy', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('students.destroy', student.id)}>
                                             Move to bin
                                         </Dropdown.Link>
                                     </>
                                 }
-                                {route().current('teachers.archive') &&
+                                {route().current('students.archive') &&
                                     <>
 
-                                        <Dropdown.Link onSuccess={() => toast.success("Successfully restored from archive.")} method="post" href={route('teachers.restoreArchive', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Successfully restored from archive.")} method="post" href={route('students.restoreArchive', student.id)}>
                                             Restore from archive
                                         </Dropdown.Link>
-                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('teachers.destroy', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Successfully move to bin.")} method="post" href={route('students.destroy', student.id)}>
                                             Move to bin
                                         </Dropdown.Link>
                                     </>
                                 }
-                                {route().current('teachers.bin') &&
+                                {route().current('students.bin') &&
                                     <>
 
-                                        <Dropdown.Link onSuccess={() => toast.success("Successfully restored from bin.")} method="post" href={route('teachers.restore', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Successfully restored from bin.")} method="post" href={route('students.restore', student.id)}>
                                             Restore from bin
                                         </Dropdown.Link>
-                                        <Dropdown.Link onSuccess={() => toast.success("Permanently deleted.")} method="post" href={route('teachers.forceDelete', teacher.id)}>
+                                        <Dropdown.Link onSuccess={() => toast.success("Permanently deleted.")} method="post" href={route('students.forceDelete', student.id)}>
                                             Permanently delete
                                         </Dropdown.Link>
                                     </>
@@ -56,9 +56,9 @@ export default function TeacherCard({ teacher }) {
                         </Dropdown>
                     </div>
                     <div className='p-5  space-y-3'>
-                        <span className='flex gap-2'> <AccountCircleIcon /> <p>{teacher.name}</p></span>
+                        <span className='flex gap-2'> <AccountCircleIcon /> <p>{student.name}</p></span>
 
-                        <i className='flex gap-2 text-sm text-gray-600'> Created:<p>{teacher.created_at}</p></i>
+                        <i className='flex gap-2 text-sm text-gray-600'> Created:<p>{student.created_at}</p></i>
                     </div>
                 </div>
             </div>

@@ -23,5 +23,15 @@ enum PermissionEnum: string
     case TEACHERS_BIN = 'bin teachers';
     case TEACHERS_RESTORE = 'restore teachers';
     case TEACHERS_FORCEDELETE = 'force delete teachers';
+
+    case STUDENTS_MANAGE = 'manage students';
+    case STUDENTS_CREATE = 'create students';
+    case STUDENTS_EDIT = 'edit students';
+    case STUDENTS_DELETE = 'delete students';
+    case STUDENTS_ARCHIVE = 'archive students';
+    case STUDENTS_RESTORE_ARCHIVE = 'restore archive students';
+    case STUDENTS_BIN = 'bin students';
+    case STUDENTS_RESTORE = 'restore students';
+    case STUDENTS_FORCEDELETE = 'force delete students';
     case TEACH = 'teach';
 }

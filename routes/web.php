@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
@@ -40,6 +41,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('teachers/{teacher}/restoreArchive', [TeacherController::class, 'restoreArchive'])->name('teachers.restoreArchive');
         Route::post('teachers/{id}/restore', [TeacherController::class, 'restore'])->name('teachers.restore');
         Route::post('teachers/{id}/forceDelete', [TeacherController::class, 'forceDelete'])->name('teachers.forceDelete');
+
+        Route::resource('students', StudentController::class)->except(['update', 'destroy']);
+        Route::get('students/archive/data', [StudentController::class, 'archive'])->name('students.archive');
+        Route::get('students/bin/data', [StudentController::class, 'bin'])->name('students.bin');
+        Route::post('students/{student}/update', [StudentController::class, 'update'])->name('students.update');
+        Route::post('students/{student}/destroy', [StudentController::class, 'destroy'])->name('students.destroy');
+        Route::post('students/{student}/moveArchive', [StudentController::class, 'moveArchive'])->name('students.moveArchive');
+        Route::post('students/{student}/restoreArchive', [StudentController::class, 'restoreArchive'])->name('students.restoreArchive');
+        Route::post('students/{id}/restore', [StudentController::class, 'restore'])->name('students.restore');
+        Route::post('students/{id}/forceDelete', [StudentController::class, 'forceDelete'])->name('students.forceDelete');
     });
 
 });
