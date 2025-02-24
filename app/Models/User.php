@@ -52,6 +52,15 @@ class User extends Authenticatable
         ];
     }
 
+    public function  scopeActive($query)
+    {
+        return $query->whereNull('archive_at');
+    }
+
+    public function scopeInActive($query)
+    {
+        return $query->whereNotNull('archive_at');
+    }
     public function scopeGetDataUsers($query)
     {
         $search = request()->input('search');
@@ -66,7 +75,6 @@ class User extends Authenticatable
                     $q->where('name', 'like', '%'.$role.'%');
                 });
             })
-            ->whereNull('archive_at')
             ->whereHas('roles', function ($query) {
                 $query->where('name', '!=', RoleEnum::ADMIN);
             })
@@ -75,28 +83,6 @@ class User extends Authenticatable
             ->appends(request()->query());
     }
 
-    public function scopeGetArchiveDataUsers($query)
-    {
-        $search = request()->input('search');
-        $role = request()->input('role');
-
-        return $query->with('roles:id,name')
-            ->when($search, function ($query) use ($search) {
-                $query->where('name', 'like', '%'.$search.'%');
-            })
-            ->when($role, function ($query) use ($role) {
-                $query->whereHas('roles', function ($q) use ($role) {
-                    $q->where('name', 'like', '%'.$role.'%');
-                });
-            })
-            ->whereNotNull('archive_at')
-            ->whereHas('roles', function ($query) {
-                $query->where('name', '!=', RoleEnum::ADMIN);
-            })
-            ->latest()
-            ->paginate(21)
-            ->appends(request()->query());
-    }
 
     public function teachers()
     {
