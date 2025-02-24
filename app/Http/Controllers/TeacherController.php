@@ -69,7 +69,7 @@ class TeacherController extends Controller
      */
     public function update(UpdateTeacherRequest $request, Teacher $teacher)
     {
-        //
+        $teacher->update($request->validated());
     }
 
     /**
