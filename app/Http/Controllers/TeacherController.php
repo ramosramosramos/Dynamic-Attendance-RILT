@@ -26,6 +26,17 @@ class TeacherController extends Controller
         ]);
 
     }
+    public function archive()
+    {
+
+        return inertia('Teacher/Archive', [
+            'teachers' => TeacherResource::collection(Teacher::query()->inActive()->getTeachers()),
+            'filters' => [
+                'search' => request('search', ''),
+            ],
+        ]);
+
+    }
 
     /**
      * Show the form for creating a new resource.

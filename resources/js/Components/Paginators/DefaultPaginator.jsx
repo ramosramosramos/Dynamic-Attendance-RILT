@@ -16,7 +16,7 @@ export default function DefaultPaginator({ meta, url ,filters}) {
   };
 
   return ( !meta.total != 0 ? null :
-    <Stack spacing={2}>
+    <Stack spacing={2} marginTop={5}>
       <Pagination count={meta?.last_page} page={page} onChange={handleChange} />
     </Stack>
   );
