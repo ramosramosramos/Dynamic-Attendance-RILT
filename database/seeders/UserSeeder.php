@@ -18,13 +18,11 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-
         $this->createRoles();
         $this->createPermmisions();
         User::factory(100)->create();
         $this->createStudentsAndTeachers();
     }
-
 
     public function getAdmin()
     {
@@ -38,6 +36,7 @@ class UserSeeder extends Seeder
             ]
         )->assignRole(RoleEnum::ADMIN);
     }
+
     public function createStudentsAndTeachers()
     {
         $users = User::whereNotIn('id', [$this->getAdmin()->id])->get();
@@ -53,6 +52,7 @@ class UserSeeder extends Seeder
             Role::create(['name' => $role->value]);
         }
     }
+
     public function createPermmisions()
     {
         foreach (PermissionEnum::cases() as $permission) {
