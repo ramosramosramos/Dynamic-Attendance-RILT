@@ -56,7 +56,11 @@ class TeacherController extends Controller
      */
     public function edit(Teacher $teacher)
     {
-        //
+        $user  = [
+            'id'=>$teacher->id,
+            'user_id'=>$teacher->user_id,
+        ];
+        return inertia('Teacher/Edit', ['teachers' => $this->getTeachers(), 'user' => $user]);
     }
 
     /**
@@ -78,7 +82,7 @@ class TeacherController extends Controller
     private function getTeachers()
     {
         return Cache::remember('teachers', now()->addHours(24), function () {
-            return  User::whereHas('roles', function ($role) {
+            return User::whereHas('roles', function ($role) {
                 return $role->where('name', RoleEnum::TEACHER);
             })->select(['id', 'name'])->orderBy('name', 'asc')->get();
         });

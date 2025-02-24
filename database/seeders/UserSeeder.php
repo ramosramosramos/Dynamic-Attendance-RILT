@@ -20,13 +20,13 @@ class UserSeeder extends Seeder
 
         $this->createRoles();
         $this->createPermmisions();
-        User::factory(100)->create();
+        User::factory(100)->createQuietly();
         $this->createStudentsAndTeachers();
     }
 
     public function getAdmin()
     {
-        return User::create(
+        return User::createQuietly(
             [
                 'name' => 'Kent Jerone Ramos',
                 'email' => 'admin@gmail.com',
@@ -49,14 +49,14 @@ class UserSeeder extends Seeder
     {
 
         foreach (RoleEnum::cases() as $role) {
-            Role::create(['name' => $role->value]);
+            Role::createQuietly(['name' => $role->value]);
         }
     }
 
     public function createPermmisions()
     {
         foreach (PermissionEnum::cases() as $permission) {
-            Permission::create(['name' => $permission->value]);
+            Permission::createQuietly(['name' => $permission->value]);
         }
     }
 }

@@ -1,37 +1,34 @@
 import PrimaryButton from '@/Components/Buttons/PrimaryButton';
 import InputError from '@/Components/Inputs/InputError';
 import InputLabel from '@/Components/Inputs/InputLabel';
-import SelectInput from '@/Components/Inputs/SelectInput';
-import TextInput from '@/Components/Inputs/TextInput';
 import BackLink from '@/Components/Links/BackLink';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, useForm } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 
-export default function Edit({ user, roles }) {
+export default function Edit({user, teachers }) {
 
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: user.data.name,
-        email: user.data.email,
-        role: user.data.role_name,
+
+        user_id: user.user_id,
+
 
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('users.update',user.data.id), {
+        post(route('teachers.update',user.id), {
             preserveScroll: true,
             showProgress: false,
             onSuccess: () => {
-                toast.success('User updated successfully!');
+                toast.success('Teacher created successfully!');
                 reset();
-                router.get(route('users.index'));
+                router.get(route('teachers.index'));
             },
             onError: (error) => {
-                toast.error(error.name);
-                toast.error(error.email);
-                toast.error(error.role);
+                toast.error(error.user_id);
+
             }
         });
 
@@ -41,18 +38,18 @@ export default function Edit({ user, roles }) {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Edit | User
+                    Edit | Teacher
                 </h2>
             }
         >
-            <Head title="Edit | User" />
+            <Head title="Edit | Teacher" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <BackLink href={route('users.index')}>
-                                Go back to users
+                            <BackLink href={route('teachers.index')}>
+                                Go back to teachers
                             </BackLink>
                         </div>
                     </div>
@@ -60,45 +57,22 @@ export default function Edit({ user, roles }) {
 
 
                         <form onSubmit={submit} className='w-full'>
-                            <div>
-                                <InputLabel htmlFor="name" value="Name" />
 
-                                <TextInput
-                                    id="name"
-                                    name="name"
-                                    value={data.name}
-                                    className="mt-1 block w-full"
-                                    autoComplete="name"
-                                    isFocused={true}
-                                    onChange={(e) => setData('name', e.target.value)}
-
-                                />
-
-                                <InputError message={errors.name} className="mt-2" />
-                            </div>
 
                             <div className="mt-4">
-                                <InputLabel htmlFor="email" value="Email" />
+                                <InputLabel htmlFor="teacher" value="Teacher" />
 
-                                <TextInput
-                                    id="email"
-                                    type="email"
-                                    name="email"
-                                    value={data.email}
-                                    className="mt-1 block w-full"
-                                    autoComplete="username"
-                                    onChange={(e) => setData('email', e.target.value)}
+                                <select  value={data.user_id} onChange={(e) => setData('user_id', e.target.value)}
 
-                                />
+                                    className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
+                                >
+                                    <option value={''}>{"Select teacher"}</option>
+                                    {teachers?.map((teacher) => (
+                                        <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
+                                    ))}
+                                </select>
 
-                                <InputError message={errors.email} className="mt-2" />
-                            </div>
-                            <div className="mt-4">
-                                <InputLabel htmlFor="role" value="Role" />
-
-                                <SelectInput value={data.role} onChange={(e) => setData('role', e.target.value)} items={roles} />
-
-                                <InputError message={errors.role} className="mt-2" />
+                                <InputError message={errors.user_id} className="mt-2" />
                             </div>
 
 
@@ -106,7 +80,7 @@ export default function Edit({ user, roles }) {
 
 
                                 <PrimaryButton disabled={processing}>
-                                    Save
+                                  Save
                                 </PrimaryButton>
                             </div>
                         </form>
