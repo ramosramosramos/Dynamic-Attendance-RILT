@@ -8,6 +8,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router } from '@inertiajs/react';
 import MenuIcon from '@mui/icons-material/Menu';
 export default function Index({ users, roles, filters }) {
+
+    const filteredArrays = { search: filters?.search ?? '',role:filters?.role ?? '' };
+
     return (
         <AuthenticatedLayout
             header={
@@ -43,7 +46,7 @@ export default function Index({ users, roles, filters }) {
                             </Dropdown>
                         </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
-                            <SearchInput items={users.data} url={route('users.index')} filters={filters} />
+                            <SearchInput items={users.data} url={route('users.index')} filters={filteredArrays} />
                             <SelectSearch items={roles} url={route('users.index')} filters={filters} />
                         </div>
 

@@ -77,9 +77,30 @@ class TeacherController extends Controller
      */
     public function destroy(Teacher $teacher)
     {
-        //
+        $teacher->update(['archive_at' => null]);
+        $teacher->delete();
+    }
+    public function moveArchive(Teacher $teacher)
+    {
+        $teacher->update(['archive_at' => now()]);
     }
 
+    public function restoreArchive(Teacher $teacher)
+    {
+        $teacher->update(['archive_at' => null]);
+    }
+
+    public function restore($id)
+    {
+        $teacher = Teacher::withTrashed()->find($id);
+        $teacher->restore();
+    }
+
+    public function forceDelete($id)
+    {
+        $teacher = Teacher::withTrashed()->find($id);
+        $teacher->forceDelete();
+    }
     private function getTeachers()
     {
         return Cache::remember('teachers', now()->addHours(24), function () {

@@ -35,7 +35,7 @@ export default function SearchInput({ items, url, filters }) {
         setOptions([]);
     };
 
-    const { data, setData, get } = useForm({ search: filters?.search ?? '',role:filters?.role ?? '' });
+    const { data, setData, get } = useForm(filters);
 
     const submit = (e) => {
         e.preventDefault();
