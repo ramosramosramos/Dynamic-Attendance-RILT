@@ -8,6 +8,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 
 export default function Bin({ users, roles, filters }) {
+    const filteredArrays = { search: filters?.search ?? '',role:filters?.role ?? '' };
     return (
         <AuthenticatedLayout
             header={
@@ -44,7 +45,7 @@ export default function Bin({ users, roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.bin')} />
+                    <DefaultPaginator meta={users.meta} url={route('users.bin')} filters={filteredArrays} />
                 </div>
             </div>
         </AuthenticatedLayout>

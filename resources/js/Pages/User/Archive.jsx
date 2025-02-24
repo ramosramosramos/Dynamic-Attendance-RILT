@@ -45,7 +45,7 @@ export default function Archive({ users, roles, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={users.meta} url={route('users.archive')} />
+                    <DefaultPaginator meta={users.meta} url={route('users.archive')} filters={filteredArrays} />
                 </div>
             </div>
         </AuthenticatedLayout>

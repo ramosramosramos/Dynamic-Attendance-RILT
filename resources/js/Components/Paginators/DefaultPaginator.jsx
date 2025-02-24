@@ -12,7 +12,7 @@ export default function DefaultPaginator({ meta, url ,filters}) {
     setPage(value);
 
     // Navigate to the new page using Inertia
-    router.get(url, { page: value , search: filters?.search ?? '',role:filters?.role ?? ''}, { preserveScroll: true });
+    router.get(url, { page: value ,...filters}, { preserveScroll: true });
   };
 
   return ( !meta.total != 0 ? null :
