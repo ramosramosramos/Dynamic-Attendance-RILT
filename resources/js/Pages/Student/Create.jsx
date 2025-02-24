@@ -6,7 +6,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, useForm } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 
-export default function Create({ teachers }) {
+export default function Create({ students }) {
 
     const { data, setData, post, processing, errors, reset } = useForm({
 
@@ -18,13 +18,13 @@ export default function Create({ teachers }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('teachers.store'), {
+        post(route('students.store'), {
             preserveScroll: true,
             showProgress: false,
             onSuccess: () => {
-                toast.success('Teacher created successfully!');
+                toast.success('Student created successfully!');
                 reset();
-                router.get(route('teachers.index'));
+                router.get(route('students.index'));
             },
             onError: (error) => {
                 toast.error(error.user_id);
@@ -38,18 +38,18 @@ export default function Create({ teachers }) {
         <AuthenticatedLayout
             header={
                 <h2 className="text-xl font-semibold leading-tight text-gray-800">
-                    Create | Teacher
+                    Create | Student
                 </h2>
             }
         >
-            <Head title="Create | Teacher" />
+            <Head title="Create | Student" />
 
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900">
-                            <BackLink href={route('teachers.index')}>
-                                Go back to teachers
+                            <BackLink href={route('students.index')}>
+                                Go back to students
                             </BackLink>
                         </div>
                     </div>
@@ -60,15 +60,15 @@ export default function Create({ teachers }) {
 
 
                             <div className="mt-4">
-                                <InputLabel htmlFor="teacher" value="Teacher" />
+                                <InputLabel htmlFor="student" value="Student" />
 
                                 <select  value={data.user_id} onChange={(e) => setData('user_id', e.target.value)}
 
                                     className="rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 "
                                 >
-                                    <option value={''}>{"Select teacher"}</option>
-                                    {teachers?.map((teacher) => (
-                                        <option key={teacher.id} value={teacher.id}>{teacher.name}</option>
+                                    <option value={''}>{"Select student"}</option>
+                                    {students?.map((student) => (
+                                        <option key={student.id} value={student.id}>{student.name}</option>
                                     ))}
                                 </select>
 
