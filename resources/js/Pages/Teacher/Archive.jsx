@@ -28,7 +28,7 @@ export default function Archive({ teachers, filters }) {
                             </BackLink>
                         </div>
                         <div className="p-6 text-gray-900 flex flex-wrap gap-5 items-center max-sm:justify-center  sm:justify-center md:justify-center lg:justify-start">
-                            <SearchInput items={teachers.data} url={route('teachers.index')} filters={filteredArrays} />
+                            <SearchInput items={teachers.data} url={route('teachers.archive')} filters={filteredArrays} />
                         </div>
 
 
@@ -44,7 +44,7 @@ export default function Archive({ teachers, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={teachers.meta} url={route('teachers.archive')} filters={filters} />
+                    <DefaultPaginator meta={teachers.meta} url={route('teachers.archive')} filters={filteredArrays} />
                 </div>
             </div>
         </AuthenticatedLayout>

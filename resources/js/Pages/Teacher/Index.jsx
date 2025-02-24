@@ -59,7 +59,7 @@ export default function Index({ teachers, filters }) {
                         }
 
                     </div>
-                    <DefaultPaginator meta={teachers.meta} url={route('teachers.index')} filters={filters} />
+                    <DefaultPaginator meta={teachers.meta} url={route('teachers.index')} filters={filteredArrays} />
                 </div>
             </div>
         </AuthenticatedLayout>
