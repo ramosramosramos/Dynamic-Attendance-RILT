@@ -72,7 +72,10 @@ class TeacherController extends Controller
      */
     public function show(Teacher $teacher)
     {
-        //
+
+        return inertia('Teacher/Show',[
+            'teacher' => new TeacherResource($teacher->load(['user'])),
+        ]);
     }
 
     /**

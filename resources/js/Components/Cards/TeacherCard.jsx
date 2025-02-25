@@ -19,6 +19,9 @@ export default function TeacherCard({ teacher }) {
                             <Dropdown.Content>
                                 {route().current('teachers.index') &&
                                     <>
+                                        <Dropdown.Link href={route('teachers.show', teacher.id)}>
+                                            Assigned students
+                                        </Dropdown.Link>
                                         <Dropdown.Link href={route('teachers.edit', teacher.id)}>
                                             Edit
                                         </Dropdown.Link>
